@@ -10,7 +10,7 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  if (!head.next) return head
+  if (!head || !head.next) return head;
   let next = head.next;
   let result = reverseList(next)
   head.next = null;
@@ -23,14 +23,7 @@ var reverseList = function (head) {
   // return pre
   // return reverse(null, head)
 };
-var reverseList = function (head) {
-  if (!head || !head.next) return head;
-  let next = head.next; // next节点，反转后是最后一个节点
-  let reverseHead = reverseList(next);
-  head.next = null; // 裁减 head
-  next.next = head; // 尾接
-  return reverseHead;
-};
+
 
 // function reverse(pre, cur) {
 //   if (!cur) return pre
