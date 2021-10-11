@@ -10,25 +10,17 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-  if (!head || !head.next) return head;
-  let next = head.next;
-  let result = reverseList(next)
+  if (!head || !head.next) return head
+  let result = reverseList(head.next)
+
+  head.next.next = head;
   head.next = null;
-  next.next = head;
   return result
-  // let [pre, v] = [null, head]
-  // while (v) {
-  //   [v.next, pre, v] = [pre, v, v.next]
-  // }
-  // return pre
-  // return reverse(null, head)
 };
 
 
-// function reverse(pre, cur) {
-//   if (!cur) return pre
-//   let temp = cur.next;
-//   cur.next = pre
-
-//   return reverse(cur, temp)
-// }
+ // let [pre, next] = [null, head]
+  // while (next) {
+  //   [next.next, pre, next] = [pre, next, next.next]
+  // }
+  // return pre
