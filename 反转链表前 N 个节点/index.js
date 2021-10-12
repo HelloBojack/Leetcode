@@ -9,111 +9,70 @@
  * @param {ListNode} head
  * @return {ListNode}
  */
-// let temp = null
-// var reverseNList = function (head, n) {
-//   if (n == 1) {
-//     temp = head.next
-//     return head
-//   }
-
-//   let last = reverseNList(head.next, n - 1)
-//   head.next.next = head
-//   head.next = temp
-//   return last
-// }
-// [1, 2, 3, 4, 5],2
-
-// 2, 1
-// temp = 3
-// last = 2
-// 3.next = 2
-// 2.next = 3
-
-// 1, 2
-// 2.next = 1
-// 1.next = 3
-
-
-var reverseNList = function (head, n) {
-  let last = head
+var reverseLastNList = function (head, n) {
+  let fast = head
+  let slow = head
   for (var i = 0; i < n; i++) {
-    last = last.next
+    fast = fast.next;
   }
-
-  let [pre, cur] = [null, head]
-  while (cur != last) {
-    [cur, cur.next, pre] = [cur.next, pre, cur]
+  while (fast.next) {
+    fast = fast.next
+    slow = slow.next
   }
-  head.next = last
-
-  return pre
+  let [pre, cur] = [null, slow.next]
+  while (cur) {
+    [cur.next, pre, cur] = [pre, cur, cur.next]
+  }
+  slow.next = pre
+  return head
 }
 
-
-// var reverseList = function (head) {
-//   if (!head || !head.next) return head
-//   var last = reverseList(head.next)
-
-//   head.next.next = head
-//   head.next = null
-
-//   return last
-// };
-// var reverseList = function (head) {
-//   let [pre, next] = [null, head]
-//   while (next != null) {
-//     [next.next, pre, next] = [pre, next, next.next]
+// public ListNode reverseLastN(ListNode head, int n) {
+//         ListNode slow = head;
+//         ListNode fast = head;
+//   for (int i = 0; i < n; i++) {
+//     fast = fast.next;
 //   }
-//   return pre
-// };
-
-// let next = null
-// var reverseNList = function (head, n) {
-//   if (n == 1) {
-//     next = head.next
-//     return head
+//   while (fast.next != null) {
+//     slow = slow.next;
+//     fast = fast.next;
 //   }
-//   var last = reverseNList(head.next, n - 1)
-//   head.next.next = head
-//   head.next = next
 
-//   return last
+//         ListNode cur = slow.next;
+//         ListNode pre = null;
+//         ListNode next;
+//   while (cur != null) {
+//     next = cur.next;
+//     cur.next = pre;
+//     pre = cur;
+//     cur = next;
+//   }
+
+//   slow.next = pre;
+//   return head;
 // }
+// [1, 2, 3, 4, 5], 2 -> [1, 2, 3, 5, 4]
 
-// var reverseNList = function (head, n) {
-//   var last = head
-//   for (var i = 0; i < n; i++) {
-//     last = last.next
-//   }
+// slow = 1, fast = 1
+// i = 0
+// i < 2 -> fast=2, i = 1
+// i < 2 -> fast=3, i = 2
 
-//   let [pre, next] = [null, head]
-//   while (next != last) {
-//     [next.next, pre, next] = [pre, next, next.next]
-//   }
+// slow = 2,fast=4
+// slow = 3,fast=5
 
-//   head.next = last
+// cur = 4
+// pre = null
 
-//   return pre
-// };
+// [cur.next, pre, cur] = [pre, cur, cur.next]
+// 4.next = null
+// pre = 4
+// cur = 5
 
-// [1, 2, 3, 4, 5], 2
-// last = 1,
-//   i = 0, n = 2
-// last = 2,
-//   i = 1, n = 2
-// last = 3,
-//   i = 2, n = 2
+// 5.next = 4
+// pre = 5
+// cur = null
 
+// slow.next = pre
 
-//   [pre, next] = [null, 1]
-
-// 1.next = null
-// pre = 1
-// next = 2
-
-// 2.next = 1
-// pre = 2
-// next = 3
-
-
-// 2 -> 1 -> null
+// return head
