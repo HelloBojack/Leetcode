@@ -10,10 +10,15 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
+  // let [pre, cur] = [null, head]
+  // while (cur) {
+  //   [cur.next, cur, pre] = [pre, cur.next, cur]
+  // }
+  // return pre
+
   if (!head || !head.next) return head
 
   let last = reverseList(head.next)
-
   head.next.next = head
   head.next = null
   return last
