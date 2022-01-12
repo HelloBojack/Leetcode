@@ -4,16 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function (nums, target) {
-  let _map = new Map()
-  for (let i = 0; i < nums.length; i++) {
-    if (_map.has(target - nums[i])) {
-      return [_map.get(target - nums[i]), i]
-    }
-    else {
-      _map.set(nums[i], i)
-    }
+  let map = new Map();
+  for (let j = 0; j < nums.length; j++) {
+    map.set(nums[j], j);
   }
-  return []
-};
 
-console.log(twoSum([2, 7, 11, 15], 9))
+
+  for (let i = 0; i < nums.length; i++) {
+    let n = target - nums[i];
+    if (map.has(n) && map.get(n) !== i)
+      return [i, map.get(n)]
+  }
+};
+console.log(twoSum([3, 2, 4], 6));
