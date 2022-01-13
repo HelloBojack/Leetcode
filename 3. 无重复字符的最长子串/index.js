@@ -3,26 +3,28 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
-  let arr = []; let max = 0;
+  let max = 0
 
   for (let i = 0; i < s.length; i++) {
-    if (arr.includes(s[i])) {
-      // console.log(arr.indexOf(s[i]))
-      arr.splice(0, arr.indexOf(s[i]) + 1)
+    let temp = s.slice(i, i + 1)
+    for (let index = i + 1; index < s.length; index++) {
+      // console.log('s[index]', s[index]);
+      if (temp.includes(s[index])) {
+        break
+      } else {
+        temp += s[index]
+      }
     }
-    arr.push(s[i])
-    // console.log(arr)
-
-    // console.log(arr)
-    max = Math.max(arr.length, max)
+    max = Math.max(max, temp.length)
   }
+
   return max
 };
 
-console.log(lengthOfLongestSubstring(s = "pwwkew"))
-console.log(lengthOfLongestSubstring(s = "vvvvv"))
-console.log(lengthOfLongestSubstring(s = "abcabcbb"))
-console.log(lengthOfLongestSubstring(s = "aab"))
-console.log(lengthOfLongestSubstring(s = "dvdf"))
-console.log(lengthOfLongestSubstring(s = "dvdf"))
-console.log(lengthOfLongestSubstring(s = "aabaab!bb"))
+console.log(lengthOfLongestSubstring(s = "pwwkew"))   //3
+console.log(lengthOfLongestSubstring(s = "vvvvv"))  // 1 
+console.log(lengthOfLongestSubstring(s = "abcabcbb")) //3
+console.log(lengthOfLongestSubstring(s = "aab"))  //2
+console.log(lengthOfLongestSubstring(s = "dvdf")) //3
+console.log(lengthOfLongestSubstring(s = "aabaab!bb")) // 3
+
