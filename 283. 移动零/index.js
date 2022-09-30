@@ -3,13 +3,21 @@
  * @return {void} Do not return anything, modify nums in-place instead.
  */
 var moveZeroes = function (nums) {
-  for (let index = 0; index < nums.length; index++) {
-    if (nums[index] == 0) {
-      nums.splice(index, 1)
-      nums.push(0)
-      index--
-    }
-
+  if (nums.length <= 1) {
+    return nums;
   }
-  return nums
+  var fast = 0;
+  var slow = 0;
+
+  while (fast < nums.length) {
+    if (nums[fast] != 0) {
+      nums[slow] = nums[fast];
+      if (slow != fast) {
+        nums[fast] = 0;
+      }
+      slow++;
+    }
+    fast++;
+  }
+  return nums;
 };
